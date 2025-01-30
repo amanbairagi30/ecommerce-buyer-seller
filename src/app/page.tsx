@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabse/client";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { User } from "@prisma/client";
+import ProductsPage from "@/components/products-page";
 
 export default function Home() {
   const supabase = createClient();
@@ -63,6 +64,11 @@ export default function Home() {
           </div>
         )}
       </div>
+      <Link href="/products">
+        <button className="bg-blue-500 text-white px-4 py-2 rounded-md">
+          Products
+        </button>
+      </Link>
     </div>
   );
 }
