@@ -5,12 +5,16 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-
+interface SearchFormData {
+  query?: string;
+  min?: string;
+  max?: string;
+}
 export function SearchForm() {
   const router = useRouter();
   const form = useForm();
-
-  const onSubmit = (data: any) => {
+  // remove any and gicve the correct type
+  const onSubmit = (data: SearchFormData) => {
     const params = new URLSearchParams();
     if (data.query) params.set("query", data.query);
     if (data.min) params.set("min", data.min);

@@ -4,7 +4,6 @@ import { createClient } from "@/lib/supabse/client";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { User } from "@prisma/client";
-import ProductsPage from "@/components/products-page";
 
 export default function Home() {
   const supabase = createClient();

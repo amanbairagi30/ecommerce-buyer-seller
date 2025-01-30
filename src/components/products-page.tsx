@@ -1,8 +1,9 @@
 // app/products/page.tsx
-import { prisma } from "@/lib/prisma";
 import { ProductCard } from "./product-card";
 import { SearchForm } from "./search";
 import Link from "next/link";
+import { Prisma } from "@prisma/client";
+import { prisma } from "@/lib/prisma";
 
 export default async function ProductsPage({
   searchParams,
@@ -14,7 +15,7 @@ export default async function ProductsPage({
   };
 }) {
   // Build the filter conditions dynamically
-  const whereConditions: any = {};
+  const whereConditions: Prisma.ProductWhereInput = {};
 
   if (searchParams?.query) {
     whereConditions.name = {

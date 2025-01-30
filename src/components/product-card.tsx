@@ -3,8 +3,9 @@
 
 import { AddToCart } from "./add-to-cart";
 import { WishlistButton } from "./wishlist-button";
+import { Product } from "@prisma/client";
 
-export function ProductCard({ product }: { product: any }) {
+export function ProductCard({ product }: { product: Product }) {
   return (
     <div className="border rounded-lg p-4">
       <div className="flex justify-between items-start mb-4">

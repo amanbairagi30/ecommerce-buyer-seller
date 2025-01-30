@@ -3,13 +3,13 @@
 
 import { useCart } from "@/hooks/useCart";
 import { ProductCard } from "@/components/product-card";
-import { prisma } from "@/lib/prisma";
 import { useEffect } from "react";
 import { useState } from "react";
+import { Product } from "@prisma/client";
 
 export default function CartPage() {
   const { cart } = useCart();
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     async function fetchProducts() {

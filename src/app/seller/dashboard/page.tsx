@@ -5,19 +5,21 @@ import { useForm } from "react-hook-form";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { createProduct } from "@/app/actions/createProduct";
 import { Textarea } from "@/components/ui/textarea";
-
+interface ProductFormData {
+  name: string;
+  price: string;
+  description: string;
+}
 export default function ProductForm() {
-  const form = useForm({
+  const form = useForm<ProductFormData>({
     defaultValues: {
       name: "",
       price: "", // Keep this as a string, it will be converted later
@@ -25,7 +27,7 @@ export default function ProductForm() {
     },
   });
 
-  const handleSubmit = async (data: any) => {
+  const handleSubmit = async (data: ProductFormData) => {
     try {
       const formattedData = {
         ...data,

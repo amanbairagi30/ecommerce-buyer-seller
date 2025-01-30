@@ -5,10 +5,11 @@ import { useWishlist } from "@/hooks/useWishlist";
 import { ProductCard } from "@/components/product-card";
 import { useState } from "react";
 import { useEffect } from "react";
+import { Product } from "@prisma/client";
 
 export default function WishlistPage() {
   const { wishlist } = useWishlist();
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     async function fetchProducts() {
