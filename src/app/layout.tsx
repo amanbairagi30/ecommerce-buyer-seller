@@ -1,18 +1,19 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Inter, Instrument_Sans, Instrument_Serif } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
 import { TanstackProvider } from "@/components/tanstack-procider";
+import Navbar from "@/components/navbar";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const instrumentalSans = Instrument_Sans({
+  subsets: ["latin"],
+  variable: "--font-instrumental-sans",
 });
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const instrumentalSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: "normal",
+  variable: "--font-instrumental-serif",
 });
 
 export const metadata: Metadata = {
@@ -28,16 +29,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${instrumentalSans.variable} ${instrumentalSerif.variable} ${inter.variable} font-primary antialiased`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <TanstackProvider>{children}</TanstackProvider>
-        </ThemeProvider>
+        <TanstackProvider>
+          <Navbar />
+          {children}
+        </TanstackProvider>
       </body>
     </html>
   );

@@ -1,73 +1,28 @@
-"use client";
-
-import { createClient } from "@/lib/supabse/client";
+import { Footer } from "@/components/footer";
+import Hero from "@/components/hero";
+import ProductsPage from "@/components/products-page";
+import { IconArrowUpRight } from "@tabler/icons-react";
 import Link from "next/link";
-import { useQuery } from "@tanstack/react-query";
-import { User } from "@prisma/client";
 
 export default function Home() {
-  const supabase = createClient();
-
-  // Fetch user data via API
-  const { isPending, error, data } = useQuery<User>({
-    queryKey: ["userData"],
-    queryFn: async () => {
-      const res = await fetch("/api/user");
-      if (!res.ok) throw new Error("Unauthorized");
-      return res.json();
-    },
-  });
-
-  if (isPending) return <p>Loading...</p>;
-  if (error) return <p className="text-red-500">Error: {error.message}</p>;
-
   return (
-    <div className="flex justify-between items-center p-4">
-      <h1 className="text-2xl font-bold">Ecomm</h1>
-      <div className="flex items-center gap-4">
-        {data ? (
-          <>
-            <div className="flex items-center gap-4">
-              {data?.role === "SELLER" ? (
-                <Link href="/seller/dashboard">
-                  <button className="bg-blue-500 text-white px-4 py-2 rounded-md">
-                    Dashboard
-                  </button>
-                </Link>
-              ) : (
-                <Link href="/buyer/profile">
-                  <button className="bg-blue-500 text-white px-4 py-2 rounded-md">
-                    Profile
-                  </button>
-                </Link>
-              )}
-            </div>
-            <button
-              onClick={async () => {
-                await supabase.auth.signOut();
-                window.location.reload(); // Refresh to clear session
-              }}
-              className="bg-red-500 text-white px-4 py-2 rounded-md"
-            >
-              Logout
-            </button>
-          </>
-        ) : (
-          <div className="flex items-center gap-4">
-            <button className="bg-blue-500 text-white px-4 py-2 rounded-md">
-              Login
-            </button>
-            <button className="bg-blue-500 text-white px-4 py-2 rounded-md">
-              Auth
-            </button>
-          </div>
-        )}
+    <div className="mt-16">
+      <Hero />
+      <div className="max-w-7xl mx-auto p-4">
+        <div className="flex mt-20 w-full justify-center items-center">
+          <h1 className="text-4xl font-serif text-center font-bold">
+            Fast Fashion <br /> is here
+          </h1>
+        </div>
+        <ProductsPage />
+        <Link
+          href="/products"
+          className="flex items-center justify-center mt-10 gap-2"
+        >
+          View All <IconArrowUpRight className="size-4" />
+        </Link>
       </div>
-      <Link href="/products">
-        <button className="bg-blue-500 text-white px-4 py-2 rounded-md">
-          Products
-        </button>
-      </Link>
+      <Footer />
     </div>
   );
 }
